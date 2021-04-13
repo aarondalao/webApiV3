@@ -1,0 +1,94 @@
+<!--
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>EmployeeId</th>
+      <th>EmployeeName</th>
+      <th>Department</th>
+      <th>DateOfJoining</th>
+      <th>PhotoFileName</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+  <tbody>
+  -->
+  <!-- I CHANGED THE CAMEL CASING TO PLAIN TEXT SINCE NPGSQL HAS THIS WEIRD FORMAT -->
+  <!-- CHANGE THIS BACK TO CAMEL CASING IF SOMETHING WEIRD HAPPENS TO MS SQL -->
+  <!--
+    <tr *ngFor="let dataItem of EmployeeList">
+      <td>{{ dataItem.employeeid }}</td>
+      <td>{{ dataItem.employeename }}</td>
+      <td>{{ dataItem.department }}</td>
+      <td>{{ dataItem.dateofjoining }}</td>
+      <td>{{ dataItem.photofilename }}</td>
+      <td>
+        <button type="button" class="btn btn-light mr-1">Edit</button>
+        <button type="button" class="btn btn-light mr-1">Delete</button>
+      </td>
+    </tr>
+    <tr></tr>
+    <tr></tr>
+  </tbody>
+</table>
+-->
+<button mat-raised-button (click)="addEmployee()">Add Employee</button>
+
+
+<!-- replacing bootstrap table into angular material table -->
+<table mat-table [dataSource]="EmployeeList" class="mat-elevation-z8">
+  <ng-container matColumnDef="employeeid">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let data"> {{data.employeeid}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="employeename">
+    <th mat-header-cell *matHeaderCellDef> Employee Name. </th>
+    <td mat-cell *matCellDef="let data"> {{data.employeename}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="department">
+    <th mat-header-cell *matHeaderCellDef> Department </th>
+    <td mat-cell *matCellDef="let data"> {{data.department}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="dateofjoining">
+    <th mat-header-cell *matHeaderCellDef> Date Joined </th>
+    <td mat-cell *matCellDef="let data"> {{data.dateofjoining}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="photofilename">
+    <th mat-header-cell *matHeaderCellDef> Photo </th>
+    <td mat-cell *matCellDef="let data"> {{data.photofilename}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="actionbuttons">
+    <th mat-header-cell *matHeaderCellDef> Options </th>
+    <td mat-cell *matCellDef="let data"> 
+       <!-- edit button -->
+       
+        <button
+          mat-icon-button
+          color="accent"
+          aria-label="example icon with a edit icon"
+          
+          (click)="updateEmployee(data)" 
+          class="material-icons"
+        >
+          <mat-icon> edit </mat-icon>
+        </button>
+        <!-- delete button -->
+        <button mat-icon-button
+          color="warn"
+          class="material-icons"
+          aria-label="example icon with a delete icon"
+          type="button"
+          (click)="deleteEmployee(data)">
+          <mat-icon> delete </mat-icon>
+          </button>
+        </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

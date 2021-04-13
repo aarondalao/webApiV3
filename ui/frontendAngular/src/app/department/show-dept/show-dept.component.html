@@ -1,0 +1,106 @@
+<!-- Angular Material Dialog -->
+<button mat-raised-button (click)="addDepartment()">Add Department</button>
+
+
+<!--
+<h2 mat-dialog-title>{{ modalTitle }}</h2>
+<mat-dialog-content>
+  <p>Place content here</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()">Close</button>
+</mat-dialog-actions>
+
+-->
+<!--  table from bootstrap -->
+<!--
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>DepartmentId</th>
+      <th>DepartmentName</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+  <tbody>
+  -->
+  <!-- CHANGE THIS BACK TO CAMEL CASING IF SOMETHING WEIRD HAPPENS TO MS SQL -->
+    <!--
+    <tr  *ngFor="let dataItem of DepartmentList" >
+      <td>{{ dataItem.departmentid }}</td>
+      <td>{{ dataItem.departmentname }}</td> 
+      <td>
+      -->
+        <!-- edit button -->
+        <!--
+        <button
+          mat-icon-button
+          color="accent"
+          aria-label="example icon with a edit icon"
+          (click)="editDepartment(dataItem)"
+          class="material-icons"
+        >
+          <mat-icon> edit </mat-icon>
+        </button>
+        -->
+        <!-- delete button -->
+        <!--
+        <button
+          mat-icon-button
+          color="warn"
+          class="material-icons"
+          aria-label="example icon with a delete icon"
+          type="button"
+          (click)="deleteDepartment()"
+        >
+          <mat-icon> delete </mat-icon>
+        </button>
+      </td>
+    </tr>
+    <tr></tr>
+    <tr></tr>
+  </tbody>
+</table>
+-->
+
+<table mat-table [dataSource]="DepartmentList" class="mat-elevation-z8">
+  <ng-container matColumnDef="departmentid">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let data"> {{data.departmentid}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="departmentname">
+    <th mat-header-cell *matHeaderCellDef> Department Name. </th>
+    <td mat-cell *matCellDef="let data"> {{data.departmentname}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actionbuttons">
+    <th mat-header-cell *matHeaderCellDef> Options </th>
+    <td mat-cell *matCellDef="let data"> 
+       <!-- edit button -->
+       <!-- that (click) is the main culprit why passing the department id is always undefined -->
+        <button
+          mat-icon-button
+          color="accent"
+          aria-label="example icon with a edit icon"
+          
+          (click)="editDepartment(data.departmentid,data.departmentname)" 
+          class="material-icons"
+        >
+          <mat-icon> edit </mat-icon>
+        </button>
+        <!-- delete button -->
+        <button mat-icon-button
+          color="warn"
+          class="material-icons"
+          aria-label="example icon with a delete icon"
+          type="button"
+          (click)="deleteDepartment(data)">
+          <mat-icon> delete </mat-icon>
+          </button>
+        </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

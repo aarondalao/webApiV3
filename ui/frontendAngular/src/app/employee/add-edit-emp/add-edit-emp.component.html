@@ -1,0 +1,50 @@
+<!-- dialog -->
+<h2 mat-dialog-title>{{ modalTitle }}</h2>
+
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label> Employee Name</mat-label>
+    <input matInput placeholder="Employee Name" [(ngModel)]="employeename" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label> department</mat-label>
+    <input matInput placeholder="department" [(ngModel)]="department" />
+  </mat-form-field>
+
+
+<!-- fix this part!! -->
+  <mat-form-field>
+    <mat-label> Date of Joining</mat-label>
+    <input matInput [matDatepicker]="picker" placeholder="choose a date" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label> photo file name</mat-label>
+    <input
+      matInput
+      placeholder="photo file name "
+      [(ngModel)]="photofilename"
+    />
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()">Close</button>
+  <button
+    class="mat-raised-button"
+    (click)="addEmployee()"
+    *ngIf="employeeid == 0"
+  >
+    Add
+  </button>
+  <button
+    class="mat-raised-button"
+    (click)="updateEmployee()"
+    *ngIf="employeeid != 0"
+  >
+    Update
+  </button>
+</mat-dialog-actions>

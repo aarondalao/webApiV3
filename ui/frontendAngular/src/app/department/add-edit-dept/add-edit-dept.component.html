@@ -1,0 +1,16 @@
+<!-- dialog -->
+<h2 mat-dialog-title>{{ modalTitle }}</h2>
+
+<mat-dialog-content>
+    <mat-form-field>
+        <mat-label> Department Name</mat-label>
+        <input matInput placeholder="Department Name" [(ngModel)]="departmentname">
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()">Close</button>
+  <button class="mat-raised-button" (click)="addDepartment()" *ngIf="departmentid == 0">Add</button>
+  <button class="mat-raised-button" (click)="updateDepartment()" *ngIf="departmentid != 0">Update</button>
+
+</mat-dialog-actions>
